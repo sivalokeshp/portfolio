@@ -1,5 +1,4 @@
-*
-{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,6 +12,7 @@ body
     color: black;
     padding: 0;
 }
+
 
 header{
     background-color: rgba(45, 230, 25, 0.836);
@@ -324,145 +324,181 @@ header{
 
 
 /* Skills Section */
-.skills-grid {
+.skills-matrix {
+  padding-left:15%;
+  padding-right: 15%;
     display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    /* Alternative responsive layout: */
-    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+    /* Creates a responsive grid that adjusts the number of columns based on screen width */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1.5rem; /* Space between each skill item */
 }
 
-.skill-category {
-    background: var(--white);
-    padding: 2rem;
+/* New Individual Skill Item Style */
+/* This replaces .skill-category and .skill-tag */
+.skill-item {
+    background-color: #161b22;
+    border: #6cf14e solid 2px;
     border-radius: 20px;
-    box-shadow: var(--shadow);
-    border: 2px solid rgb(123, 235, 85);
-    /* transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateX(0); default state */
-}
-.skill-cat h3{
-  display: flex;
-  flex-direction: column;
-  margin-top: 40px;
+    padding: 1.5rem;
+    display: flex;                  /* Using flexbox to easily center content */
+    flex-direction: column;         /* Stack icon on top of text */
+    align-items: center;            /* Center horizontally */
+    justify-content: center;        /* Center vertically */
+    gap: 1rem;                      /* Space between the icon and the text */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s;
 }
 
-
-/* Skill Tags */
-.skill-tags {
-  margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-}
-
-.skill-tag {
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.skill-tag:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    border: 2px solid var(--white);
-    box-shadow: 0 0 15px rgba(130, 255, 117, 0.8);
-    transform: translateY(-2px);
+/* Hover Effect for Skill Items */
+.skill-item:hover {
+    transform: translateY(-5px);    /* Lift the item up slightly */
+    border-color: #238636;          /* Change border color to an accent color */
+    box-shadow: 0 8px 25px rgba(35, 134, 54, 0.2); /* Add a subtle glow */
     cursor: pointer;
 }
 
-
-/* Project Section */
-
-.projects-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: center;
+/* Skill Icon Image Styling */
+.skill-item img {
+    height: 70px;           /* Set a uniform height for all icons */
+    width: auto;            /* Maintain aspect ratio */
+    object-fit: contain;
+    border-radius: 15px;
 }
+
+/* Skill Name Text Styling */
+.skill-item p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #c9d1d9; /* Ensure text is readable */
+}
+
+
+/* ============================================= */
+/* SLIDER CUSTOMIZATION VARIABLES (UPDATED)      */
+/* ============================================= */
+:root {
+    --num-cards: 8; /* Keep original */
+    --card-width: 250px; /* REDUCED from 350px -> smaller cards */
+    --gap-width: 20px;   /* Reduced spacing */
+    --animation-speed: 60s; /* Slightly faster since cards are smaller */
+}
+
+
+/* ============================================= */
+/* SLIDER CONTAINER & ANIMATION                  */
+/* ============================================= */
+.slider-container {
+    max-width: 100%;
+    margin: 2rem auto;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.slider-track {
+    display: flex;
+    gap: var(--gap-width);
+    width: calc(var(--num-cards) * 2 * (var(--card-width) + var(--gap-width)));
+    animation: scrollLeft var(--animation-speed) linear infinite;
+}
+
+.slider-container:hover .slider-track {
+    animation-play-state: running;
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 
 .project-box {
-  display: flex;
-  align-items: center;
-  background-color: #112233;
-  border-radius: 15px;
-  border: #5fd040 solid 2px;
-  width: 90%;
-  max-width: 1000px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
+    flex: 0 0 var(--card-width);
+    display: flex;
+    flex-direction: column;
+    background-color: #112233;
+    border-radius: 12px;
+    border: #5fd040 solid 2px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
+/* .project-box:hover {
+    transform: translateY(-5px) scale(1.04);
+} */
+
+
+/* ============================================= */
+/* IMAGE AREA (UPDATED HEIGHT)                  */
+/* ============================================= */
 .project-image {
-  flex: 1;
-  max-width: 50%;       /* force half width */
-  padding: 15px;        /* gap between image and border */
-  box-sizing: border-box;
+    width: 100%;
+    height: 140px; /* Reduced from 200px */
+    overflow: hidden;
+    padding: 0;
 }
 
 .project-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;  /* optional: round edges for image */
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
+
+/* ============================================= */
+/* CONTENT AREA (FONT SIZE OPTIMIZED)           */
+/* ============================================= */
 .project-content {
-  flex: 1;
-  max-width: 50%;       /* force half width */
-  padding: 30px;
-  text-align: left;
-  box-sizing: border-box;
+    flex-grow: 1;
+    padding: 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
 }
-
-
-.project-box:hover {
-  border-bottom: #5fd040 solid 3px;
-  border-right: #5fd040 solid 3px;
-}
-
 
 .project-content h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #ffffff;
+    font-size: 18px; /* Smaller */
+    margin-bottom: 6px;
+    color: #ffffff;
 }
 
 .project-content p {
-  font-size: 16px;
-  color: #c4c4c4;
-  margin-bottom: 20px;
+    font-size: 14px;
+    color: #c4c4c4;
+    margin-bottom: 12px;
+    flex-grow: 1;
 }
 
+
+/* ============================================= */
+/* BUTTONS (ADJUSTED FOR SMALLER CARD)          */
+/* ============================================= */
 .project-links {
-  display: flex;
-  gap: 20px;
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
 }
 
 .project-content .btn {
-  padding: 8px 16px;
-  color: #73c54a;
-  border: beige solid 2px;
-  border-radius: 25px;
-  text-decoration: none;
-  transition: background 0.3s ease;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: #73c54a;
+    border: 1.5px solid beige;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .project-content .btn:hover {
-  color: #fff;
-  border: #5fd040 solid 2px;
+    color: #fff;
+    border-color: #5fd04a;
 }
 
-/* Alternate layout */
-.project-box:nth-child(even) {
-  flex-direction: row-reverse;
-}
 
 
 
